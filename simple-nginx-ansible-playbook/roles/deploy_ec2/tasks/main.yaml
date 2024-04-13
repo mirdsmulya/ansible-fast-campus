@@ -1,0 +1,29 @@
+---
+- name: Configure and start EC2 instance
+  amazon.aws.ec2_instance:
+    name: web2
+    count: 1
+    image_id: ami-015f72d56355ebc27
+    instance_type: t2.micro
+    key_name: aws-key-pair
+    security_group: http-sec-group
+    network:
+      assign_public_ip: true
+    tags: {type: web, env: staging}
+    wait: true
+  register: ec2
+
+- name: Wait for SSH to become available
+  wait_for:
+    host: "{{ item.public_dns_name }}"
+    port: 22
+    delay: 3
+    timeout: 320
+  loop: "{{ ec2.instances }}"
+
+- name: Add the instances to the staging groups
+  add_host:
+    hostname: "{{ item.public_dns_name }}"
+    groupname:
+      - staging
+  loop: "{{ ec2.instances }}"
