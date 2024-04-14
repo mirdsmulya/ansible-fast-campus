@@ -1,0 +1,28 @@
+---
+- name: Launch EC2 instance
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - setup_ec2
+
+- name: Docker Installation
+  hosts: staging
+  strategy: free  
+  become: yes
+  gather_facts: true
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: /Users/mirdansyahid/Downloads/aws-key-pair.pem
+  roles:
+    - install_docker
+
+- name: setup app
+  hosts: staging
+  strategy: free  
+  become: yes
+  gather_facts: true
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: /Users/mirdansyahid/Downloads/aws-key-pair.pem
+  roles:
+    - setup_app

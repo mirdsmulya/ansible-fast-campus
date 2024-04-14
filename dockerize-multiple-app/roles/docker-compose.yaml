@@ -1,0 +1,27 @@
+version: '3'
+services:
+  # Web Service 1
+  web1:
+    image: mirdsmulya/hello-world:v0.0.1
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/code
+    environment:
+      - NAME=Fast Campus
+  # Web Service 2
+  web2:
+    image: mirdsmulya/hello-world:v0.0.1
+    ports:
+     - "5001:5000"
+    volumes:
+     - .:/code
+    environment:
+      - NAME=Mirdan Syahid
+  # Reverse proxy
+  nginx:
+    image: nginx:latest
+    ports:  
+     - "80:80"
+    volumes:
+     - ./nginx.conf:/etc/nginx/conf.d/default.conf

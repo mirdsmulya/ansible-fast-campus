@@ -1,0 +1,25 @@
+- name: Create a directory for Docker Compose file
+  file:
+    path: /app  
+    state: directory
+
+- name: Copy Docker Compose file
+  copy:
+    src: ../../docker-compose.yaml
+    dest: /app/docker-compose.yaml
+
+- name: Copy Nginx config file
+  copy:
+    src: ../../nginx.conf
+    dest: /app/nginx.conf
+
+- name: Run Docker Compose up
+  command: docker-compose up -d
+  args:
+    chdir: /app
+
+- name: Check Docker Compose services status
+  command: docker-compose ps
+  args:
+    chdir: /app
+  register: output

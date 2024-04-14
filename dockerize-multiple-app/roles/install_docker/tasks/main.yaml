@@ -1,0 +1,47 @@
+---
+- name: Install required system packages
+  apt:
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add Docker's official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add Docker's official apt repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Install Docker Compose (Debian)
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'
+  when: ansible_os_family == "Debian"
+
+- name: Install libcrypt1 (Debian)
+  apt:
+    name: libcrypt1
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Verify Docker Compose installation
+  command: docker-compose --version
