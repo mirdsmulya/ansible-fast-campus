@@ -7,9 +7,9 @@
       amazon.aws.ec2_instance:
         name: web1
         count: 2
-        image_id: ami-015f72d56355ebc27
+        image_id: ami-0f802700354a91ee9
         instance_type: t2.micro
-        key_name: aws-key-pair
+        key_name: ansible-key-pair
         security_group: http-sec-group
         network:
           assign_public_ip: true
