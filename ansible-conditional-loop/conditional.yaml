@@ -1,0 +1,17 @@
+---
+- name: Install apache
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Install apache redhat
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install apache debian
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian" 

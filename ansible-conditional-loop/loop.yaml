@@ -1,0 +1,15 @@
+---
+- name: create users
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: create users
+      user :
+        name: "{{ item }}"
+        state: present
+        groups: sudo
+      loop:
+        - dadang
+        - budi
+        - joko

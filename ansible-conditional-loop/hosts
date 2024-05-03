@@ -1,14 +1,10 @@
 [staging]
 52.221.226.28
-
-[production]
 13.250.58.34
+
 
 [staging:vars]
 ansible_user=ubuntu
 ansible_ssh_private_key_file=/Users/mirdansyahid/Downloads/ansible-key-pair.pem 
 
-[production:vars]
-ansible_user=ubuntu
-ansible_ssh_private_key_file=/Users/mirdansyahid/Downloads/ansible-key-pair.pem
 
