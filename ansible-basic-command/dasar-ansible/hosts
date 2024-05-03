@@ -1,0 +1,8 @@
+[aws_ip_public]
+server1 ansible_host=52.77.232.69 
+server2 ansible_host=18.143.180.135
+
+[aws_ip_public:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/Users/mirdansyahid/Downloads/ansible-key-pair.pem
+

@@ -1,0 +1,8 @@
+---
+- name: Ping all hosts
+  hosts: aws_ip_public
+  gather_facts: no
+
+  tasks:
+    - name: Ping
+      ping:
