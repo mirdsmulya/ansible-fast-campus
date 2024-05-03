@@ -2,7 +2,7 @@
 - name: Ping all hosts
   hosts: aws_ip_public
   gather_facts: no
-
+  become: yes
   tasks:
     - name: Ping
       ping:
