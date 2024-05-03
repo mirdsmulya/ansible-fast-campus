@@ -5,9 +5,9 @@
   become: yes
   tasks:
     - name: create users
-      user :
+      user:
         name: "{{ item }}"
-        state: present
+        state: present 
         groups: sudo
       loop:
         - dadang
