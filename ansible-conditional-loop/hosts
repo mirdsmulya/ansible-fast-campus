@@ -1,6 +1,6 @@
 [staging]
-52.221.226.28
-13.250.58.34
+18.143.181.220
+54.179.167.32
 
 [staging:vars]
 ansible_user=ubuntu

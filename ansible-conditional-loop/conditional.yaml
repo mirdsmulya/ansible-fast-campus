@@ -4,14 +4,14 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: Install apache redhat
-      apt:
+    - name: Remve apache redhat
+      yum:
         name: apache2
-        state: present
+        state: absent
       when: ansible_os_family == "RedHat"
 
-    - name: Install apache debian
+    - name: Remove apache debian
       apt:
         name: apache2
-        state: present
+        state: absent
       when: ansible_os_family == "Debian" 

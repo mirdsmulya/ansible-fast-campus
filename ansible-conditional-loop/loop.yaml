@@ -4,10 +4,10 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: create users
+    - name: delete users
       user:
         name: "{{ item }}"
-        state: present 
+        state: absent 
         groups: sudo
       loop:
         - dadang
