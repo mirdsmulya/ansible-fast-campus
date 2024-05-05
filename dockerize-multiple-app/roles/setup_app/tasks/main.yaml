@@ -5,12 +5,12 @@
 
 - name: Copy Docker Compose file
   copy:
-    src: ../../docker-compose.yaml
+    src: ../template/docker-compose.yaml
     dest: /app/docker-compose.yaml
 
 - name: Copy Nginx config file
   copy:
-    src: ../../nginx.conf
+    src: ../template/nginx.conf
     dest: /app/nginx.conf
 
 - name: Run Docker Compose up

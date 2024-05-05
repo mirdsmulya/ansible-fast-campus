@@ -1,12 +1,12 @@
 ---
 - name: Configure and start EC2 instance
   amazon.aws.ec2_instance:
-    name: web-server
-    count: 1
-    image_id: ami-06c4be2792f419b7b
-    instance_type: t2.small
-    key_name: aws-key-pair
-    security_group: http-sec-group
+    name: "{{ instance_name }}"
+    count: "{{ instance_count }}"
+    image_id: "{{ image_id }}"
+    instance_type: "{{ instance_type }}"
+    key_name: "{{ key_name }}"
+    security_group: "{{ security_group }}"
     network:
       assign_public_ip: true
     tags: {type: web, env: staging}
@@ -25,5 +25,5 @@
   add_host:
     hostname: "{{ item.public_dns_name }}"
     groupname:
-      - staging
+      - "{{ group_name }}"
   loop: "{{ ec2.instances }}"
